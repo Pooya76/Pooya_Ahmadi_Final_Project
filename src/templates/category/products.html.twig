@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello CategoryController!{% endblock %}
+
+{% block body %}
+
+    {% if products is empty %} <p style="text-align:center; color: red">There is no products to show</p> {% endif %}
+
+    {% for product in products%}
+    <div class="card" style="width: 18rem;">
+
+        <img class="card-img-top" src="{{ asset('build/images/logo.jpg') }}" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{product.name}}</h5>
+            <p class="card-text">{{product.rate}}</p>
+            <p class="card-text">{{product.availability}}</p>
+            <p class="card-text">{{product.price}}</p>
+            <a href="{{ path('app_product_view',{id: product.id} )}}" class="btn btn-warning">edit</a>
+            <a href="{{ path('app_product_delete',{id: product.id} )}}" class="btn btn-danger">delete</a>
+        </div>
+    </div>
+    {% endfor%}
+{% endblock %}

@@ -1,0 +1,8 @@
+{
+  "devDependencies": {
+    "@symfony/webpack-encore": "^3.0.0"
+  },
+  "dependencies": {
+    "npm-watch": "^0.11.0"
+  }
+}
