@@ -36,6 +36,12 @@ class ProductController extends AbstractController
     }
 
     #[Route('/product', name: 'app_product')]
+    #[Route(
+        path: '/{_locale}/product',
+        name: 'app_product',
+        requirements: ['_locale' => 'en|fa'],
+        defaults: ['_locale' => 'en']
+    )]
     public function products(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findAll();

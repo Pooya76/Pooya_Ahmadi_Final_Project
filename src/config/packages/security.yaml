@@ -38,6 +38,7 @@ security:
     access_control:
         - { path: ^/admin, roles: ROLE_SUPER_ADMIN }
         - { path: ^/.*/create, roles: ROLE_ADMIN }
+        - { path: ^/.*/order, roles: ROLE_USER }
 
 when@test:
     security:

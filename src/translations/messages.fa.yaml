@@ -13,7 +13,16 @@ menu:
   register: ثبت نام
   logout: خروج
   adminDashboard: داشبورد
+  contactUs: ارتباط با ما
 
+message:
+  subject: موضوع
+  messages: پیغام
+  email: ایمیل
+
+orders:
+  address: ادرس
+  phone: تلفن
 
 
 category: دسته
@@ -27,3 +36,4 @@ save: ذخیره
 english: انگلیسی
 persian: فارسی
 language: زبان
+order: خرید

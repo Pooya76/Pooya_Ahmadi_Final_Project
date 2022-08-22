@@ -13,6 +13,16 @@ menu:
   register: Register
   logout: Logout
   adminDashboard: Admin Dashboard
+  contactUs: Contact Us
+
+message:
+  subject: Subject
+  messages: Message
+  email: Email
+
+orders:
+  address: Address
+  phone: Phone
 
 category: Category
 search: Search
@@ -25,3 +35,4 @@ save: Save
 english: English
 persian: Persian
 language: Language
+order: Buy

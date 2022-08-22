@@ -15,6 +15,7 @@
                             <img class="card-img-top" src="{{ asset('build/images/') ~ product.pictureFilename }}"
                                  alt="Product image ">
                             <div class="card-body">
+                                <div style="transform: rotate(0);">
                                 <h5 class="card-title">{{ 'product.name'|trans }} : {{ product.name }}</h5>
                                 <p class="card-text">{{ 'product.rate'|trans }} : {{ product.rate }}/10</p>
                                 <p class="card-text">{{ 'product.price'|trans }} : {{ product.price }}  IRR</p>
@@ -23,12 +24,19 @@
                                 {% else %}
                                     <small class="card-text text-danger">{{ 'notAvailable'|trans }}</small>
                                 {% endif %}
-
+                                    <a href="{{ path('app_product_detail',{id: product.id} )}}" class="stretched-link"></a>
+                                </div>
                                 {% if is_granted('ROLE_ADMIN') %}
-                                    <br>
                                     <a href="{{ path('app_product_view',{id: product.id} ) }}" class="btn btn-warning">{{ 'edit'|trans }}</a>
                                     <a href="{{ path('app_product_delete',{id: product.id} ) }}"
                                        class="btn btn-danger">{{ 'delete'|trans }}</a>
+                                {% endif %}
+                                {% if product.availability %}
+                                    <a href="{{ path('app_product_order',{id: product.id} ) }}"
+                                       class="btn btn-outline-info">{{ 'order'|trans }}</a>
+                                {% else %}
+                                    <a href="{{ path('app_product_order',{id: product.id} ) }}"
+                                       class="btn btn-outline-info disabled">{{ 'order'|trans }}</a>
                                 {% endif %}
                             </div>
                             <div class="card-footer">
@@ -36,7 +44,7 @@
                                     <small class="text-muted mx-2 px-2 border border-secondary">{{ category.name }}</small>
                                 {% endfor %}
                             </div>
-                            <a href="{{ path('app_product_detail',{id: product.id} )}}" class="stretched-link"></a>
+
                         </div>
                     </div>
                 </div>

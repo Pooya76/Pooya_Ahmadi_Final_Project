@@ -38,6 +38,7 @@ class MenuBuilder
         $registerLabel = $this->translator->trans('menu.register');
         $logoutLabel = $this->translator->trans('menu.logout');
         $adminDashboardLabel = $this->translator->trans('menu.adminDashboard');
+        $contactUsLabel = $this->translator->trans('menu.contactUs');
 
 
         $menu = $this->factory->createItem('root');
@@ -49,7 +50,7 @@ class MenuBuilder
             $menu->addChild($createCategoryLabel, ['route' => 'app_category_create'])->setAttribute('class', 'nav-item nav-link');
         }
         if (!is_null($this->user) and in_array('ROLE_SUPER_ADMIN', $this->user->getRoles(), true)) {
-            $menu->addChild($adminDashboardLabel, ['route' => 'admin', 'class' => 'nav-link']);
+            $menu->addChild($adminDashboardLabel, ['route' => 'admin', 'class' => 'nav-link'])->setAttribute('class', 'nav-item nav-link');;
         }
 
         if (!is_null($this->user) and in_array('ROLE_USER', $this->user->getRoles(), true)) {
@@ -58,6 +59,7 @@ class MenuBuilder
             $menu->addChild($loginLabel, ['route' => 'app_login'])->setAttribute('class', 'nav-item nav-link');
             $menu->addChild( $registerLabel, ['route' => 'app_register'])->setAttribute('class', 'nav-item nav-link');
         }
+        $menu->addChild($contactUsLabel, ['route' => 'app_message'])->setAttribute('class', 'nav-item nav-link');
 
 
         return $menu;
