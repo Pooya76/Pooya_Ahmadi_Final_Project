@@ -21,7 +21,7 @@
         }
 
         .carousel-item img {
-            height: 400px;
+            height: 600px;
             padding: 20px;
         }
     </style>
@@ -50,33 +50,44 @@
         </a>
     </div>
 
-    <div class="example-wrapper">
-        {% if products is empty %} <p>There is no products to show</p> {% endif %}
-        <div class="card-deck">
-            {% for product in products %}
-                <div class="card" style="width: 18rem;">
 
-                    <img class="card-img-top" src="{{ asset('build/images/') ~ product.pictureFilename }}"
-                         alt="Product image ">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ product.name }}</h5>
-                        <p class="card-text">{{ product.rate }}</p>
-                        <p class="card-text">{{ product.availability }}</p>
-                        <p class="card-text">{{ product.price }}</p>
-                        {% if is_granted('ROLE_ADMIN') %}
-                            <a href="{{ path('app_product_view',{id: product.id} ) }}" class="btn btn-warning">edit</a>
-                            <a href="{{ path('app_product_delete',{id: product.id} ) }}"
-                               class="btn btn-danger">delete</a>
-                        {% endif %}
-                        <div class="card-footer">
-                            {% for category in product.categories %}
-                                <p class="card-text"><small class="text-muted">{{ category.name }}</small></p>
-                            {% endfor %}
+    {% if products is empty %} <p>There is no products to show</p> {% endif %}
+    <div class="container">
+        <div class="row">
+            {% for product in products %}
+                <div class="col-sm-6 col-lg-4 mb-3">
+                    <div class="card mb-3 h-100">
+                        <div class="card">
+                            <img class="card-img-top" src="{{ asset('build/images/') ~ product.pictureFilename }}"
+                                 alt="Product image ">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ 'product.name'|trans }} : {{ product.name }}</h5>
+                                <p class="card-text">{{ 'product.rate'|trans }} : {{ product.rate }}/10</p>
+                                <p class="card-text">{{ 'product.price'|trans }} : {{ product.price }}  IRR</p>
+                                {% if product.availability == true %}
+                                    <small class="card-text text-success"> {{ 'available'|trans }}</small>
+                                {% else %}
+                                    <small class="card-text text-danger">{{ 'notAvailable'|trans }}</small>
+                                {% endif %}
+
+                                {% if is_granted('ROLE_ADMIN') %}
+                                    <br>
+                                    <a href="{{ path('app_product_view',{id: product.id} ) }}" class="btn btn-warning">{{ 'edit'|trans }}</a>
+                                    <a href="{{ path('app_product_delete',{id: product.id} ) }}"
+                                       class="btn btn-danger">{{ 'delete'|trans }}</a>
+                                {% endif %}
+                            </div>
+                            <div class="card-footer">
+                                {% for category in product.categories %}
+                                    <small class="text-muted mx-2 px-2 border border-secondary">{{ category.name }}</small>
+                                {% endfor %}
+                            </div>
+                            <a href="{{ path('app_product_detail',{id: product.id} )}}" class="stretched-link"></a>
                         </div>
                     </div>
                 </div>
-
             {% endfor %}
         </div>
     </div>
+
 {% endblock %}

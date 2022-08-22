@@ -16,27 +16,43 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProductType extends AbstractType
 {
+    private $translator;
+    public function __construct(TranslatorInterface $translator)
+    {
+        $this->translator = $translator;
+    }
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $categories=$options['categories'];
+        $nameLabel = $this->translator->trans('product.name');
+        $rateLabel = $this->translator->trans('product.rate');
+        $priceLabel = $this->translator->trans('product.price');
+        $categoryLabel = $this->translator->trans('product.categories');
+        $imageLabel = $this->translator->trans('product.image');
         $builder
-            ->add('name', TextType::class)
+            ->setAttribute('class', 'form-group')
+            ->add('name', TextType::class, ['label_format' => $nameLabel])->setAttribute('class', 'form-control')
             ->add('rate', RangeType::class, [
                 'attr' => [
                     'min' => 1,
                     'max' => 10
                 ],
+                'label_format' => $rateLabel
             ])
-            ->add('availability' , CheckboxType::class)
+            ->add('availability' , CheckboxType::class, ['required' => false, 'label_format' => '%name%'])
             ->add('price', MoneyType::class, [
-                'divisor' => 100,
+                'currency' => 'IRR',
+                'label_format' => $priceLabel
             ])
 
             ->add('categories', ChoiceType::class, array(
                 'mapped'=>false,
+                'label_format' => $categoryLabel,
                 'choices'=> array(
 
                     'categories'=>$categories,
@@ -49,17 +65,9 @@ class ProductType extends AbstractType
                 'required'=>false,
             ))
             ->add('picture', FileType::class, [
-                'label' => 'Brochure (PDF file)',
-
-                // unmapped means that this field is not associated to any entity property
+                'label_format' => $imageLabel,
                 'mapped' => false,
-
-                // make it optional so you don't have to re-upload the PDF file
-                // every time you edit the Product details
                 'required' => false,
-
-                // unmapped fields can't define their validation using annotations
-                // in the associated entity, so you can use the PHP constraint classes
                 'constraints' => [
                     new File([
                         'maxSize' => '10240k',
@@ -67,11 +75,11 @@ class ProductType extends AbstractType
                             'image/jpeg',
                             'image/png',
                         ],
-                        'mimeTypesMessage' => 'Please upload a valid PDF document',
+                        'mimeTypesMessage' => 'Please upload a valid Image file',
                     ])
                 ],
             ])
-            ->add('save', SubmitType::class)
+            ->add('save', SubmitType::class, ['label_format' => '%name%'])
         ;
 
     }

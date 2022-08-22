@@ -6,15 +6,18 @@ use App\Repository\ProductRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 #[ORM\Entity(repositoryClass: ProductRepository::class)]
-class Product
+class Product implements TimeLogInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
     private ?int $id = null;
 
+    #[Assert\NotBlank]
+    #[Assert\Regex("/^[a-zA-Z]+$/",message: "Name can't contain number")]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 
@@ -25,6 +28,7 @@ class Product
     private ?bool $availability = null;
 
     #[ORM\Column]
+    #[Assert\Positive]
     private ?float $price = null;
 
     #[ORM\ManyToMany(targetEntity: Category::class, inversedBy: 'products')]
@@ -32,6 +36,12 @@ class Product
 
     #[ORM\Column(length: 255)]
     private ?string $pictureFilename = null;
+
+    #[ORM\Column]
+    private ?\DateTimeImmutable $createdAt = null;
+
+    #[ORM\Column(nullable: true)]
+    private ?\DateTimeImmutable $updatedAt = null;
 
     public function getPictureFilename() : ?string
     {
@@ -123,6 +133,30 @@ class Product
     public function removeCategory(Category $category): self
     {
         $this->Categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getCreatedAt(): ?\DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
+    public function setCreatedAt(\DateTimeImmutable $createdAt): self
+    {
+        $this->createdAt = $createdAt;
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

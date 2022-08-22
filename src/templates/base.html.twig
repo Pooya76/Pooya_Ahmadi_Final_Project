@@ -21,18 +21,23 @@
 
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
             {{ knp_menu_render('main') }}
+        </div>
 
         {{ render(controller('App\\Controller\\CategoryController::categories')) }}
+        {{ include('language.html.twig')}}
+
         <form method="get" action="{{ path("app_search") }}" class="form-inline my-2 my-lg-0">
             <label>
-                <input class="form-control mr-sm-2" type="text" name="query" placeholder="Search"/>
+                <input class="form-control mr-sm-2" type="text" name="query" placeholder={{ 'search'|trans }}/>
             </label>
-            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value="Search">
+            <input class="btn btn-outline-success my-2 my-sm-0" type="submit" value={{ 'search'|trans }}>
         </form>
     </div>
 </nav>
+
 {% block body %}
 
 {% endblock %}

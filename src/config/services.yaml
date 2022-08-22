@@ -31,3 +31,9 @@ services:
   App\Service\FileUploader:
     arguments:
       $targetDirectory: '%kernel.project_dir%/assets/images'
+
+  App\EventListener\TimeLogListener:
+
+    tags:
+      - { name: doctrine.event_listener, event: prePersist,  connection: 'default' }
+      - { name: doctrine.event_listener, event: preUpdate,  connection: 'default' }

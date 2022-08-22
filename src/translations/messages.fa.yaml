@@ -1,0 +1,29 @@
+product:
+  name: نام
+  rate: امتیاز
+  price: قیمت
+  categories: دسته
+  image: عکس
+
+menu:
+  home: خانه
+  createProduct: اضافه کردن محصول
+  createCategory: اضافه کردن دسته
+  login: ورود
+  register: ثبت نام
+  logout: خروج
+  adminDashboard: داشبورد
+
+
+
+category: دسته
+search: جستجو
+availability: وضعیت موجودی
+available: موجود
+notAvailable: ناموجود
+edit: ویرایش
+delete: حذف
+save: ذخیره
+english: انگلیسی
+persian: فارسی
+language: زبان

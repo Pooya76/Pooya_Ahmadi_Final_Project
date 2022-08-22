@@ -1,0 +1,27 @@
+product:
+  name: Name
+  rate: Rate
+  price: Price
+  categories: Category
+  image: Image
+
+menu:
+  home: Home
+  createProduct: Create Product
+  createCategory: Create Category
+  login: Login
+  register: Register
+  logout: Logout
+  adminDashboard: Admin Dashboard
+
+category: Category
+search: Search
+availability: Availability
+available: Available
+notAvailable: Not Available
+edit: Edit
+delete: Delete
+save: Save
+english: English
+persian: Persian
+language: Language
