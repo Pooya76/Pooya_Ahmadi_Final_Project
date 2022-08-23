@@ -39,6 +39,7 @@ class MenuBuilder
         $logoutLabel = $this->translator->trans('menu.logout');
         $adminDashboardLabel = $this->translator->trans('menu.adminDashboard');
         $contactUsLabel = $this->translator->trans('menu.contactUs');
+        $editCategoryLabel = $this->translator->trans('menu.editCategory');
 
 
         $menu = $this->factory->createItem('root');
@@ -48,6 +49,7 @@ class MenuBuilder
         if (!is_null($this->user) and in_array('ROLE_ADMIN', $this->user->getRoles(), true)) {
             $menu->addChild($createProductLabel, ['route' => 'app_product_create'])->setAttribute('class', 'nav-item nav-link');
             $menu->addChild($createCategoryLabel, ['route' => 'app_category_create'])->setAttribute('class', 'nav-item nav-link');
+            $menu->addChild($editCategoryLabel, ['route' => 'app_category'])->setAttribute('class', 'nav-item nav-link');
         }
         if (!is_null($this->user) and in_array('ROLE_SUPER_ADMIN', $this->user->getRoles(), true)) {
             $menu->addChild($adminDashboardLabel, ['route' => 'admin', 'class' => 'nav-link'])->setAttribute('class', 'nav-item nav-link');;

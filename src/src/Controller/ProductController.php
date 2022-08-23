@@ -19,7 +19,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
 
-
     #[Route(
         path: '/{_locale}/',
         name: 'app_home',
@@ -29,9 +28,11 @@ class ProductController extends AbstractController
     public function index(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findAll();
-
+        $dirname = "build/images/slider/";
+        $images = glob($dirname."*.jpg");
         return $this->render('product/index.html.twig', [
             'products' => $products,
+            'images' => $images
         ]);
     }
 
@@ -45,9 +46,11 @@ class ProductController extends AbstractController
     public function products(ProductRepository $productRepository): Response
     {
         $products = $productRepository->findAll();
-
+        $dirname = "build/images/slider/";
+        $images = glob($dirname."*.jpg");
         return $this->render('product/index.html.twig', [
             'products' => $products,
+            'images' => $images
         ]);
     }
 
@@ -96,7 +99,12 @@ class ProductController extends AbstractController
     }
 
     /*---*/
-    #[Route('/product/{id}', name: 'app_product_view')]
+    #[Route(
+        path: '/{_locale}/product/{id}',
+        name: 'app_product_view',
+        requirements: ['_locale' => 'en|fa'],
+        defaults: ['_locale' => 'en']
+    )]
     public function editProduct(Request $request, Product $product, ManagerRegistry $doctrine, CategoryRepository $categoryRepository, FileUploader $fileUploader): Response
     {
         $categories = $categoryRepository->findAll();

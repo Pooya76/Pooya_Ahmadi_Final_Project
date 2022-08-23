@@ -1,7 +1,11 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello OrderController!{% endblock %}
+{% block title %}New Order!{% endblock %}
 
 {% block body %}
-    {{ form(form) }}
+
+    <div class="d-flex justify-content-center mt-5">
+        {{form(form)}}
+    </div>
+
 {% endblock %}

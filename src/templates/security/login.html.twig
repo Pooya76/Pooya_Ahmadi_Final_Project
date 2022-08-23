@@ -19,9 +19,9 @@
                         {% endif %}
 
                         <h1 class="h3 mb-3 font-weight-normal">  {{ 'menu.login'|trans }}</h1>
-                        <label for="username">Username:</label>
+                        <label for="username">{{ 'username'|trans }}:</label>
                         <input type="text" id="username" name="_username" value="{{ last_username }}"/>
-                        <label for="password">Password:</label>
+                        <label for="password">{{ 'password'|trans }}:</label>
                         <input type="password" id="password" name="_password"/>
 
                         <input type="hidden" name="_csrf_token"

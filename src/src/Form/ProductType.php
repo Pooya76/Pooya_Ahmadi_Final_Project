@@ -51,6 +51,7 @@ class ProductType extends AbstractType
             ])
 
             ->add('categories', ChoiceType::class, array(
+                'required'=>true,
                 'mapped'=>false,
                 'label_format' => $categoryLabel,
                 'choices'=> array(
@@ -62,7 +63,7 @@ class ProductType extends AbstractType
                 },
                 'multiple'  => true,
                 'expanded' => true,
-                'required'=>false,
+
             ))
             ->add('picture', FileType::class, [
                 'label_format' => $imageLabel,

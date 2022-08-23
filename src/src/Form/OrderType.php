@@ -24,6 +24,7 @@ class OrderType extends AbstractType
         $phoneLabel = $this->translator->trans('orders.phone');
 
         $builder
+            ->setAttribute('class', 'form-group')
             ->add('address', TextareaType::class, ['label_format' => $addressLabel])
             ->add('phone', TelType::class, ['label_format' => $phoneLabel])
             ->add('save', SubmitType::class, ['label_format' => '%name%'])

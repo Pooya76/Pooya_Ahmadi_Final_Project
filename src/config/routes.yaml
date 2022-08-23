@@ -1,8 +1,8 @@
 controllers:
     resource: ../src/Controller/
     type: annotation
-
-
+    defaults:
+        _locale: en
 kernel:
     resource: ../src/Kernel.php
     type: annotation

@@ -36,7 +36,7 @@ class CategoryController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
-            return new Response('Category added successfully');
+            return $this->redirectToRoute('app_category');
         }
         return $this->renderForm('category/create.html.twig', [
             'form' => $form,
@@ -56,7 +56,7 @@ class CategoryController extends AbstractController
             $entityManager = $doctrine->getManager();
             $entityManager->persist($category);
             $entityManager->flush();
-            return new Response('Category updated successfully');
+            return $this->redirectToRoute('app_category');
         }
         return $this->renderForm('category/create.html.twig', [
             'form' => $form,
@@ -69,10 +69,6 @@ class CategoryController extends AbstractController
         $entityManager = $doctrine->getManager();
         $entityManager->remove($category);
         $entityManager->flush();
-        $this->get('session')->getFlashBag()->add(
-            'notice',
-            'Customer Added!'
-        );
         return $this->redirectToRoute('app_category');
     }
 

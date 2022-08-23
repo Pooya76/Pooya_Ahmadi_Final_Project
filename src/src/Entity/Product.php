@@ -17,7 +17,7 @@ class Product implements TimeLogInterface
     private ?int $id = null;
 
     #[Assert\NotBlank]
-    #[Assert\Regex("/^[a-zA-Z]+$/",message: "Name can't contain number")]
+    #[Assert\Regex("/^[a-zA-Z\s]+$/",message: "Name can't contain number")]
     #[ORM\Column(length: 255)]
     private ?string $name = null;
 

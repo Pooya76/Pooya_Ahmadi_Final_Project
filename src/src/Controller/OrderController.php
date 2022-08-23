@@ -38,7 +38,7 @@ class OrderController extends AbstractController
             $entityManager->flush();
             return new Response('Order added successfully');
         }
-        return $this->renderForm('category/create.html.twig', [
+        return $this->renderForm('order/index.html.twig', [
             'form' => $form,
         ]);
     }

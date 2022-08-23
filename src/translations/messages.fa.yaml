@@ -14,6 +14,7 @@ menu:
   logout: خروج
   adminDashboard: داشبورد
   contactUs: ارتباط با ما
+  editCategory: مدیرت دسته ها
 
 message:
   subject: موضوع
@@ -37,3 +38,5 @@ english: انگلیسی
 persian: فارسی
 language: زبان
 order: خرید
+username: نام کاربری
+password: رمز
